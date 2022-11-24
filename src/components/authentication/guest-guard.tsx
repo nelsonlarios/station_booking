@@ -1,8 +1,8 @@
-import type { FC, ReactNode } from 'react';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
-import { useAuth } from '../../hooks/use-auth';
+import type { FC, ReactNode } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+import { useAuth } from "../../hooks/use-auth";
 
 interface GuestGuardProps {
   children: ReactNode;
@@ -22,8 +22,8 @@ export const GuestGuard: FC<GuestGuardProps> = (props) => {
       }
 
       // You should remove the "disableGuard" check, because it's meant to be used only in the demo.
-      if (auth.isAuthenticated && disableGuard !== 'true') {
-        router.push('/dashboard').catch(console.error);
+      if (auth.isAuthenticated && disableGuard !== "true") {
+        router.push("/booking").catch(console.error);
       } else {
         setChecked(true);
       }
@@ -43,5 +43,5 @@ export const GuestGuard: FC<GuestGuardProps> = (props) => {
 };
 
 GuestGuard.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };

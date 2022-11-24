@@ -17,6 +17,8 @@ import { BookingDate, formatDate } from "@app/api/systemBookings";
 import { getUserBookingURL } from "@app/api/userBookings";
 
 const Booking: NextPage = () => {
+  console.log("Badminton");
+
   const { user } = useAuth();
   const dateContext = useContext(DateContext);
 

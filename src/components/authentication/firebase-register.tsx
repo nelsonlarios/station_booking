@@ -1,19 +1,10 @@
-import type { FC } from 'react';
-import { useRouter } from 'next/router';
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
-import {
-  Box,
-  Button,
-  Checkbox,
-  Divider,
-  FormHelperText,
-  Link,
-  TextField,
-  Typography
-} from '@mui/material';
-import { useAuth } from '../../hooks/use-auth';
-import { useMounted } from '../../hooks/use-mounted';
+import type { FC } from "react";
+import { useRouter } from "next/router";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { Box, Button, Checkbox, Divider, FormHelperText, Link, TextField, Typography } from "@mui/material";
+import { useAuth } from "../../hooks/use-auth";
+import { useMounted } from "../../hooks/use-mounted";
 
 export const FirebaseRegister: FC = (props) => {
   const isMounted = useMounted();
@@ -21,32 +12,22 @@ export const FirebaseRegister: FC = (props) => {
   const { createUserWithEmailAndPassword, signInWithGoogle } = useAuth();
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       policy: true,
-      submit: null
+      submit: null,
     },
     validationSchema: Yup.object({
-      email: Yup
-        .string()
-        .email('Must be a valid email')
-        .max(255)
-        .required('Email is required'),
-      password: Yup
-        .string()
-        .min(7)
-        .max(255)
-        .required('Password is required'),
-      policy: Yup
-        .boolean()
-        .oneOf([true], 'This field must be checked')
+      email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
+      password: Yup.string().min(7).max(255).required("Password is required"),
+      policy: Yup.boolean().oneOf([true], "This field must be checked"),
     }),
     onSubmit: async (values, helpers): Promise<void> => {
       try {
         await createUserWithEmailAndPassword(values.email, values.password);
 
         if (isMounted()) {
-          const returnUrl = (router.query.returnUrl as string | undefined) || '/dashboard';
+          const returnUrl = (router.query.returnUrl as string | undefined) || "/booking";
           router.push(returnUrl).catch(console.error);
         }
       } catch (err) {
@@ -58,7 +39,7 @@ export const FirebaseRegister: FC = (props) => {
           helpers.setSubmitting(false);
         }
       }
-    }
+    },
   });
 
   const handleGoogleClick = async (): Promise<void> => {
@@ -76,48 +57,36 @@ export const FirebaseRegister: FC = (props) => {
         onClick={handleGoogleClick}
         size="large"
         sx={{
-          backgroundColor: 'common.white',
-          color: 'common.black',
-          '&:hover': {
-            backgroundColor: 'common.white',
-            color: 'common.black'
-          }
+          backgroundColor: "common.white",
+          color: "common.black",
+          "&:hover": {
+            backgroundColor: "common.white",
+            color: "common.black",
+          },
         }}
         variant="contained"
       >
-        <Box
-          alt="Google"
-          component="img"
-          src="/static/icons/google.svg"
-          sx={{ mr: 1 }}
-        />
+        <Box alt="Google" component="img" src="/static/icons/google.svg" sx={{ mr: 1 }} />
         Google
       </Button>
       <Box
         sx={{
-          alignItems: 'center',
-          display: 'flex',
-          mt: 2
+          alignItems: "center",
+          display: "flex",
+          mt: 2,
         }}
       >
         <Box sx={{ flexGrow: 1 }}>
           <Divider orientation="horizontal" />
         </Box>
-        <Typography
-          color="textSecondary"
-          sx={{ m: 2 }}
-          variant="body1"
-        >
+        <Typography color="textSecondary" sx={{ m: 2 }} variant="body1">
           OR
         </Typography>
         <Box sx={{ flexGrow: 1 }}>
           <Divider orientation="horizontal" />
         </Box>
       </Box>
-      <form
-        noValidate
-        onSubmit={formik.handleSubmit}
-      >
+      <form noValidate onSubmit={formik.handleSubmit}>
         <TextField
           error={Boolean(formik.touched.email && formik.errors.email)}
           fullWidth
@@ -144,51 +113,30 @@ export const FirebaseRegister: FC = (props) => {
         />
         <Box
           sx={{
-            alignItems: 'center',
-            display: 'flex',
+            alignItems: "center",
+            display: "flex",
             ml: -1,
-            mt: 2
+            mt: 2,
           }}
         >
-          <Checkbox
-            checked={formik.values.policy}
-            name="policy"
-            onChange={formik.handleChange}
-          />
-          <Typography
-            color="textSecondary"
-            variant="body2"
-          >
-            I have read the
-            {' '}
-            <Link
-              component="a"
-              href="#"
-            >
+          <Checkbox checked={formik.values.policy} name="policy" onChange={formik.handleChange} />
+          <Typography color="textSecondary" variant="body2">
+            I have read the{" "}
+            <Link component="a" href="#">
               Terms and Conditions
             </Link>
           </Typography>
         </Box>
         {Boolean(formik.touched.policy && formik.errors.policy) && (
-          <FormHelperText error>
-            {formik.errors.policy}
-          </FormHelperText>
+          <FormHelperText error>{formik.errors.policy}</FormHelperText>
         )}
         {formik.errors.submit && (
           <Box sx={{ mt: 3 }}>
-            <FormHelperText error>
-              {formik.errors.submit as string}
-            </FormHelperText>
+            <FormHelperText error>{formik.errors.submit as string}</FormHelperText>
           </Box>
         )}
         <Box sx={{ mt: 2 }}>
-          <Button
-            disabled={formik.isSubmitting}
-            fullWidth
-            size="large"
-            type="submit"
-            variant="contained"
-          >
+          <Button disabled={formik.isSubmitting} fullWidth size="large" type="submit" variant="contained">
             Register
           </Button>
         </Box>
