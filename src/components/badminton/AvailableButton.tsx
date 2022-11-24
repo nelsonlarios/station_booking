@@ -20,7 +20,7 @@ const AvailableButton = ({ stationId }: Props) => {
     const interval = setInterval(() => {
       const currentInterval = getCurrentInterval();
 
-      if (systemBookings?.[stationId]?.includes(currentInterval)) {
+      if (systemBookings?.[stationId as any]?.includes(currentInterval)) {
         setAvailable({ background: "red", text: "Busy" });
       } else {
         setAvailable({ background: "green", text: "Availabe" });
