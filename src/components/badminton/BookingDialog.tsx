@@ -74,8 +74,8 @@ const BookingDialog = ({}: CongratulationsDialogProps) => {
                     label="Choose your date and time slot:"
                     inputFormat="dd/MM/yyyy"
                     value={startDate}
-                    onChange={(newDate) => setStartDate(newDate as Date)}
-                    renderInput={(params) => <TextField {...params} />}
+                    onChange={(newDate: Date) => setStartDate(newDate as Date)}
+                    renderInput={(params: any) => <TextField {...params} />}
                   />
                   {/* <FormGroup sx={{ pl: 1, mt: 2 }}>
                     <DateCheckbox>08:00 - 08:30</DateCheckbox>

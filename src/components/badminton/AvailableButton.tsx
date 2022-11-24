@@ -29,7 +29,7 @@ const AvailableButton = ({ stationId }: Props) => {
     return () => clearInterval(interval);
   }, [systemBookings, stationId]);
 
-  const text = systemBookings?.[stationId]?.includes;
+  const text = systemBookings?.[stationId as any]?.includes;
   return (
     <Button size="small">
       <span

@@ -16,7 +16,6 @@ import {
 import NextLink from "next/link";
 import { ArrowRight as ArrowRightIcon } from "../../icons/arrow-right";
 import ComputerIcon from "@mui/icons-material/Computer";
-import { Shuttlecock as ShuttlecockIcon } from "../../icons/shuttlecock";
 import React, { ChangeEvent, useState } from "react";
 import { Program } from "@app/api/programs";
 import { setStartedProgramDB } from "@app/api/startedPrograms";

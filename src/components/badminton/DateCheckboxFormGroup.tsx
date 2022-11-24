@@ -80,8 +80,8 @@ function generateProps(
   time: string
 ) {
   return {
-    disabled: userBookings?.includes(time) ? false : disabled || systemBookings?.[stationId]?.includes(time),
-    lineThrough: systemBookings?.[stationId]?.includes(time) && !userBookings?.includes(time),
+    disabled: userBookings?.includes(time) ? false : disabled || systemBookings?.[stationId as any]?.includes(time),
+    lineThrough: systemBookings?.[stationId as any]?.includes(time) && !userBookings?.includes(time),
     checked: userBookings?.includes(time) ?? false,
   };
 }
